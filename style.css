@@ -8,9 +8,9 @@ html {
   scroll-behavior: smooth;
 }
 
-body {
+/* body {
   overflow-x: hidden;
-}
+} */
 
 :root {
   --primary-font: "Playfair Display", serif;
@@ -23,6 +23,7 @@ body {
 .landing-page {
   height: 100vh;
   width: 100%;
+  display: block;
   position: relative;
   /* background: url("/img/bg11.jpg") no-repeat center;
   background-color: rgba(255, 255, 255, 0.6);
@@ -32,7 +33,7 @@ body {
 
 .bgVideo {
   position: fixed;
-  top: 0px;
+  top: 0;
   bottom: 0;
   min-width: 100%;
   height: 100vh;
@@ -58,12 +59,13 @@ body {
 }
 
 .nav-bar {
-  max-height: 120px;
-  background-color: var(--secondary-color);
+  height: 120px;
+  width: 100%;
+  background: var(--secondary-color);
   color: var(--primary-color);
   text-shadow: 0px 5px 2px rgba(0, 0, 0, 0.2);
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
   justify-content: space-between;
@@ -72,7 +74,7 @@ body {
   overflow: hidden;
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 999;
 }
 
 .nav-bar-title {
@@ -355,20 +357,19 @@ button:active {
 .card-container {
   height: 100vh;
   width: 100%;
-  background-color: #373e02;
+  background-color: #f5f5f4;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 30px;
-  padding: 10px 5px;
 }
 
 .card {
   height: 600px;
   width: 400px;
-  border: 2px solid black;
-  background-color: #fff7eb;
+  background-color: #fff;
   border-radius: 15px;
   box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
   display: flex;
@@ -507,6 +508,14 @@ button:active {
 
   .slider-container {
     display: none;
+  }
+
+  .card-container {
+    overflow-y: scroll;
+  }
+
+  .card {
+    scale: 0.9;
   }
 }
 

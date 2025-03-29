@@ -1,4 +1,4 @@
-const buyAmount = document.querySelector(".amount");
+const amountSpan = document.querySelector(".amount");
 const minusAmount = document.querySelectorAll(".minus");
 const plusAmount = document.querySelectorAll(".plus");
 const addToCartBtn = document.querySelectorAll(".add-to-cart");
@@ -34,17 +34,56 @@ icon.forEach((item) => {
 //   });
 // }
 
-plusAmount.forEach((item) => {
-  item.addEventListener("click", (e) => {
-    buyAmount.innerText = shopAmount += 1;
+// plusAmount.forEach((item) => {
+//   item.addEventListener("click", () => {
+//     buyAmount.innerText = shopAmount += 1;
+//   });
+// });
+
+// minusAmount.forEach((item) => {
+//   item.addEventListener("click", () => {
+//     buyAmount.innerText = shopAmount -= 1;
+//   });
+// });
+
+plusAmount.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    const amountSpan = e.target
+      .closest(".btn-container")
+      .querySelector(".amount");
+
+    if (!amountSpan) {
+      console.error("Amount not  found");
+    }
+
+    let currentAmount = parseInt(shopAmount.innerText) || 0;
+
+    if (isNaN(currentAmount)) {
+      console.error("invalid number detected, resetting to 0");
+      currentAmount = 0;
+    }
+    currentAmount++;
+    amountSpan.innerText = currentAmount;
+
+    console.log(`New amount: ${currentAmount}`);
   });
 });
 
-minusAmount.forEach((item) => {
-  item.addEventListener("click", () => {
-    buyAmount.innerText = shopAmount -= 1;
+minusAmount.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    const amountSpan = e.target
+      .closest(".btn-container")
+      .querySelector(".amount");
 
-    if (buyAmount === 0) {
+    if (!amountSpan) {
+      console.error("Amount not found");
+      return;
     }
+
+    let currentAmount = parseInt(shopAmount.innerText) || 0;
+    if (currentAmount > 0) {
+      currentAmount--;
+    }
+    amountSpan.innerText = currentAmount;
   });
 });

@@ -5,8 +5,10 @@ const addToCartBtn = document.querySelectorAll(".add-to-cart");
 const cartAmount = document.querySelector(".cart-amount");
 const icon = document.querySelectorAll(".fa-cart-shopping");
 
+const shopNow = document.querySelector(".shop-now");
+const products = document.querySelector(".products");
+
 cartAmount.innerText = 0;
-let shopAmount = 0;
 let shoppingCart = [];
 
 icon.forEach((item) => {
@@ -23,29 +25,6 @@ icon.forEach((item) => {
   });
 });
 
-// function updateCart() {
-//   const cartList = document.querySelector(".cart-list");
-//   cartList.innerHTML = "";
-
-//   cartAmount.forEach((item) => {
-//     const listItem = document.createElement("li");
-//     listItem.textContent = `${item.name} - ${item.price}`;
-//     cartList.appendChild(listItem);
-//   });
-// }
-
-// plusAmount.forEach((item) => {
-//   item.addEventListener("click", () => {
-//     buyAmount.innerText = shopAmount += 1;
-//   });
-// });
-
-// minusAmount.forEach((item) => {
-//   item.addEventListener("click", () => {
-//     buyAmount.innerText = shopAmount -= 1;
-//   });
-// });
-
 plusAmount.forEach((btn) => {
   btn.addEventListener("click", (e) => {
     const amountSpan = e.target
@@ -53,10 +32,10 @@ plusAmount.forEach((btn) => {
       .querySelector(".amount");
 
     if (!amountSpan) {
-      console.error("Amount not  found");
+      console.error("Amount not found");
     }
 
-    let currentAmount = parseInt(shopAmount.innerText) || 0;
+    let currentAmount = parseInt(amountSpan.innerText) || 0;
 
     if (isNaN(currentAmount)) {
       console.error("invalid number detected, resetting to 0");
@@ -80,10 +59,40 @@ minusAmount.forEach((btn) => {
       return;
     }
 
-    let currentAmount = parseInt(shopAmount.innerText) || 0;
+    let currentAmount = parseInt(amountSpan.innerText) || 0;
     if (currentAmount > 0) {
       currentAmount--;
     }
     amountSpan.innerText = currentAmount;
   });
+});
+
+shopNow.addEventListener("click", () => {
+  document.querySelector(".section-two").scrollIntoView({
+    behavior: "smooth",
+    block: "start",
+  });
+});
+
+products.addEventListener("click", () => {
+  document.querySelector(".section-two").scrollIntoView({
+    behavior: "smooth",
+    block: "start",
+  });
+});
+
+const observer = new IntersectionObserver(
+  (entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("fade-in");
+        observer.unobserve(entry.target);
+      }
+    });
+  },
+  { threshold: 0.3 }
+);
+
+document.querySelectorAll(".hidden").forEach((section) => {
+  observer.observe(section);
 });
